@@ -1,0 +1,30 @@
+<html>
+    <head>
+        <title>asian cultural typography chronology</title>
+    </head>
+    <body>
+        <h1>asian cultural typography chronology</h1>
+        <script>
+            for(let i =0; i<data.length; i++){
+                const item = data[i];    
+                let entry = document.createElement("div");
+                entry.innerHTML = `
+                <div class="entry">
+                    <div class="nation">${item.nation}</div>
+                    <div class="category">${item.category}</div>
+                    <div class="yr">${item.yr}</div>
+                    <div class="desc">${item.desc}</div>
+                    <div class="ex1">${item.ex1}</div>
+                    <div class="ex2">${item.ex2}</div>
+                    <div class="ex3">${item.ex3}</div>
+                    <div class="propa1">${item.propa1}</div>
+                    <div class="propa2">${item.propa2}</div>
+                    <div class="cite1">${item.cite1}</div>
+                    <div class="cite2">${item.cite2}</div>
+                </div>
+                `
+                document.body.appendChild(entry);
+            }
+        </script>
+    </body>
+</html>
