@@ -14,8 +14,8 @@
             }
             h1{
                 position: fixed;
-                left: 0;
-                top: 0;
+                right: 3rem;
+                top: 3rem;
                 z-index: 100;
             }   
             #contents{
@@ -30,7 +30,7 @@
                 left: 0;
                 top: 0;
                 border: 1px solid #000;
-                padding: 0.5rem;
+                padding: 0.5rem 0.7rem;
             }
             .entry:hover{
                 cursor: pointer;
