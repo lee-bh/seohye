@@ -9,6 +9,13 @@
         <div id="contents"></div>
         <script src="data.js"></script>
         <script>
+            const yrLine = document.createElement("div");
+            yrLine.classList.add("yrLine");
+            yrLine.style.left = "500px";
+            document.body.appendChild(yrLine);
+
+
+
             data.sort((a, b) => a.yr - b.yr);
             const startYr = data[0].yr;
             const endYr = data[data.length - 1].yr;
