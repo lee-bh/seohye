@@ -23,9 +23,9 @@
                 height: 100vh;
                 position: relative;
                 left:0;top:0;
-                background-color: yellow;
             }
             .entry{
+                z-index: 9999;
                 position: absolute;
                 background-color: #fff;
                 left: 0;
@@ -43,6 +43,16 @@
                 left: 0;
                 top: 0;
                 width: 0;
-                height: 100vh;
                 border-left: 1px solid #000;
+                height: 100vh;
+            }
+            .yrTextContainer{
+                position: absolute;
+                left: 0;
+                top: 0px;
+            }
+            .yrText{
+                position: absolute;
+                left: 0;
+                top: 0;
             }

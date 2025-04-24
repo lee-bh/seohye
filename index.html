@@ -19,14 +19,32 @@
             const intervalV = 40;
             let contents = document.getElementById("contents");
             contents.style.width = (timeLength*intervalH + stX + 400) + "px";
-            contents.style.height = data.length*intervalV + stY + "px";
+            const contentsHeight = data.length*intervalV + stY;
+            contents.style.height = contentsHeight + "px";
 
-            const yrLine = document.createElement("div");
-            yrLine.classList.add("yrLine");
-            yrLine.style.left = "500px";
-            contents.appendChild(yrLine);
-            const tt = startYr/100;
-            console.log(tt.toFixed(2));
+            const yrTextContainer = document.createElement("div");
+            yrTextContainer.id = "yrTextContainer";
+            yrTextContainer.classList.add("yrTextContainer");
+            document.body.appendChild(yrTextContainer);
+
+            const yrLineSt = startYr - startYr%10;
+            const yrLineEnd = endYr + (10 - endYr%10);
+            const yrLineInterval = intervalH*10;
+            const yrLineCount = (yrLineEnd - yrLineSt)/10 + 5;
+            const stPos = -(startYr%10 * intervalH);
+            for(let i = 0; i < yrLineCount; i++){
+                const yrText = document.createElement("div");
+                yrText.classList.add("yrText");
+                yrText.innerHTML = (yrLineSt + i*10).toString();
+                yrText.style.left = (stPos + i*yrLineInterval +2) + "px";
+                yrText.style.top = "0px";
+                yrTextContainer.appendChild(yrText);
+                const yrLine = document.createElement("div");
+                yrLine.classList.add("yrLine");
+                yrLine.style.left = (stPos + i*yrLineInterval) + "px";
+                yrLine.style.height = contentsHeight + "px";
+                yrTextContainer.appendChild(yrLine);
+            }
 
             data.forEach((item, index) => {
                 let entry = document.createElement("div");
@@ -74,12 +92,15 @@ function onMouseMove(e) {
   if (!isDragging) return;
   currentX = e.clientX - startX;
   currentY = e.clientY - startY;
+  document.getElementById("yrTextContainer").style.left = currentX + "px";
+  document.getElementById("yrTextContainer").style.zIndex = "3";
   content.style.transform = `translate(${currentX}px, ${currentY}px)`;
+  
 }
 
 function onMouseUp() {
   isDragging = false;
-  content.style.cursor = 'grab';
+  content.style.cursor = 'default';
   document.removeEventListener('mousemove', onMouseMove);
   document.removeEventListener('mouseup', onMouseUp);
 }
@@ -89,7 +110,6 @@ content.addEventListener('mousedown', (e) => {
   startX = e.clientX - currentX;
   startY = e.clientY - currentY;
   content.style.cursor = 'grabbing';
-
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
