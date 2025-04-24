@@ -9,13 +9,6 @@
         <div id="contents"></div>
         <script src="data.js"></script>
         <script>
-            const yrLine = document.createElement("div");
-            yrLine.classList.add("yrLine");
-            yrLine.style.left = "500px";
-            document.body.appendChild(yrLine);
-
-
-
             data.sort((a, b) => a.yr - b.yr);
             const startYr = data[0].yr;
             const endYr = data[data.length - 1].yr;
@@ -27,6 +20,14 @@
             let contents = document.getElementById("contents");
             contents.style.width = (timeLength*intervalH + stX + 400) + "px";
             contents.style.height = data.length*intervalV + stY + "px";
+
+            const yrLine = document.createElement("div");
+            yrLine.classList.add("yrLine");
+            yrLine.style.left = "500px";
+            contents.appendChild(yrLine);
+            const tt = startYr/100;
+            console.log(tt.toFixed(2));
+
             data.forEach((item, index) => {
                 let entry = document.createElement("div");
                 entry.classList.add("entry");

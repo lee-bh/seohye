@@ -23,6 +23,7 @@
                 height: 100vh;
                 position: relative;
                 left:0;top:0;
+                background-color: yellow;
             }
             .entry{
                 position: absolute;
@@ -38,7 +39,7 @@
                 color: #fff;
             }
             .yrLine{
-                position: fixed;
+                position: absolute;
                 left: 0;
                 top: 0;
                 width: 0;
