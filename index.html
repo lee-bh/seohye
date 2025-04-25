@@ -11,8 +11,6 @@
         <div id="yrTextContainer" class="yrTextContainer"></div>
         <script src="data.js"></script>
         <script>
-
-window.scrollTo(0,0);
 data.sort((a, b) => a.yr - b.yr);
 const startYr = data[0].yr;
 const endYr = data[data.length - 1].yr;
@@ -23,7 +21,7 @@ const intervalH = 10;
 const intervalV = 40;
 let contents = document.getElementById("contents");
 contents.style.width = (timeLength*intervalH + stX + 400) + "px";
-const contentsHeight = data.length*intervalV + stY;
+const contentsHeight = data.length*intervalV + stY * 2;
 contents.style.height = contentsHeight + "px";
 
 const yrLineSt = startYr - startYr%10;
@@ -52,6 +50,9 @@ data.forEach((item, index) => {
     entry.style.left = (stX + (item.yr - startYr)*intervalH) + "px";
     entry.style.top = stY + index*intervalV + "px";
     let contents = document.getElementById("contents");
+    if(item.nation == "한국"){ entry.style.borderColor = "#000"};
+    if(item.nation == "일본"){ entry.style.borderColor = "#00F"};
+    if(item.nation == "중국"){ entry.style.borderColor = "#F00"};
     contents.appendChild(entry);
 });
 
@@ -76,7 +77,6 @@ const content = document.getElementById('contents');
 content.style.transform = "translate(0px,0px)";
 let isDragging = false;
 let startX, startY;
-let currentX = 0, currentY = 0;
 content.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.clientX - currentX;
