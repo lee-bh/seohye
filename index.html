@@ -101,9 +101,11 @@ function onMouseMove(e) {
   document.getElementById("yrLineContainer").style.left = currentX + "px";
   content.style.top = currentY + "px";
   content.style.left = currentX + "px";
+  console.log("move");
   //content.style.transform = `translate(${currentX}px, ${currentY}px)`;
 }
-function onMouseUp() {
+function onMouseUp(e) {
+console.log("mouseup");
   isDragging = false;
   content.style.cursor = 'default';
   document.removeEventListener('mousemove', onMouseMove);
