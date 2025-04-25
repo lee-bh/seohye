@@ -34,13 +34,10 @@
                 color: #fff;
             }
             #contents{
-                width: 3000px;
-                height: 100vh;
                 position: relative;
-                left:0;top:0;
-                background:rgba(76, 175, 80, 0.3)      
+                /* background:rgba(76, 175, 80, 0.3)       */
             }
-            .yrTextContainer, .yrLineContainer{      
+            #yrTextContainer, #yrLineContainer{      
                 position: absolute;
                 left: 0px;
                 top: 0px;
