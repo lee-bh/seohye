@@ -7,8 +7,13 @@
     </head>
     <body>
         <h1>동아시아 타이포그래피 연대기</h1>
-        <main id="main"></main>
+        <main id="main">
+            <div id="yrLineContainer"></div>
+            <div id="contents" class="move"></div>
+            <div id="yrTextContainer"></div>
+        </main>
         <script src="data.js"></script>
+        <script src="mousedrag.js"></script>
         <script>
 
 data.sort((a, b) => a.yr - b.yr);
@@ -20,13 +25,13 @@ const stY = 100;
 const intervalH = 10;
 const intervalV = 40;
 
-const main = document.getElementById("main");
-let a = document.createElement("div");
-a.id = "yrLineContainer"; main.appendChild(a);
-let b = document.createElement("div");b.className = "move";
-b.id = "contents"; main.appendChild(b);
-let c = document.createElement("div");
-c.id = "yrTextContainer"; main.appendChild(c);
+// const main = document.getElementById("main");
+// let a = document.createElement("div");
+// a.id = "yrLineContainer"; main.appendChild(a);
+// let b = document.createElement("div");b.className = "move";
+// b.id = "contents"; main.appendChild(b);
+// let c = document.createElement("div");
+// c.id = "yrTextContainer"; main.appendChild(c);
 
 
 const content = document.getElementById("contents");
@@ -81,36 +86,6 @@ function createEntryDetail(item){
         if(item.cite1 != null){entry.innerHTML += `<div class="cite1">${item.cite1}</div>`}  
         document.body.appendChild(entry);
     }
-}
-
-let isDragging = false;
-let startX , startY;
-let currentX = 0, currentY = 0;
-
-document.addEventListener('mousedown', (e) => {
-  isDragging = true;
-  startX = e.clientX - currentX;
-  startY = e.clientY - currentY;
-  content.style.cursor = 'grabbing';
-  document.addEventListener('mousemove', onMouseMove);
-  document.addEventListener('mouseup', onMouseUp);
-});
-
-function onMouseMove(e) {
-  if (!isDragging) return;
-  currentX = e.clientX - startX;
-  currentY = e.clientY - startY;
-  document.getElementById("yrTextContainer").style.left = currentX + "px";
-  document.getElementById("yrLineContainer").style.left = currentX + "px";
-  content.style.top = currentY + "px";
-  content.style.left = currentX + "px";
-  //content.style.transform = `translate(${currentX}px, ${currentY}px)`;
-}
-function onMouseUp(e) {
-  isDragging = false;
-  content.style.cursor = 'default';
-  document.removeEventListener('mousemove', onMouseMove);
-  document.removeEventListener('mouseup', onMouseUp);
 }
 
 
