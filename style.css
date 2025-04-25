@@ -11,32 +11,39 @@
             }
             body{
                 background-color: #ddd;
+                overflow: hidden;
             }
             h1{
                 position: fixed;
                 right: 3rem;
                 top: 3rem;
                 z-index: 100;
-            }   
-            #contents{
-                width: 3000px;
-                height: 100vh;
-                position: relative;
-                left:0;top:0;
-            }
+            }    
             .entry{
-                z-index: 9999;
+                user-select: none;
                 position: absolute;
                 background-color: #fff;
                 left: 0;
                 top: 0;
-                border: 1px solid #000;
+                border-left: 3px solid #000;
                 padding: 0.5rem 0.7rem;
             }
             .entry:hover{
                 cursor: pointer;
                 background-color: black;
                 color: #fff;
+            }
+            #contents{
+                width: 3000px;
+                height: 100vh;
+                position: relative;
+                left:0;top:0;
+                background:rgba(76, 175, 80, 0.3)      
+            }
+            .yrTextContainer, .yrLineContainer{      
+                position: absolute;
+                left: 0px;
+                top: 0px;
             }
             .yrLine{
                 position: absolute;
@@ -45,11 +52,6 @@
                 width: 0;
                 border-left: 1px solid #000;
                 height: 100vh;
-            }
-            .yrTextContainer{
-                position: absolute;
-                left: 0;
-                top: 0px;
             }
             .yrText{
                 position: absolute;

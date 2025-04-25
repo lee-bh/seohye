@@ -6,105 +6,77 @@
     </head>
     <body>
         <h1>동아시아 타이포그래피 연대기</h1>
+        <div id="yrLineContainer" class="yrLineContainer"></div>
         <div id="contents"></div>
+        <div id="yrTextContainer" class="yrTextContainer"></div>
         <script src="data.js"></script>
         <script>
-            data.sort((a, b) => a.yr - b.yr);
-            const startYr = data[0].yr;
-            const endYr = data[data.length - 1].yr;
-            const timeLength = endYr - startYr;
-            const stX = 100;
-            const stY = 100;
-            const intervalH = 10;
-            const intervalV = 40;
-            let contents = document.getElementById("contents");
-            contents.style.width = (timeLength*intervalH + stX + 400) + "px";
-            const contentsHeight = data.length*intervalV + stY;
-            contents.style.height = contentsHeight + "px";
 
-            const yrTextContainer = document.createElement("div");
-            yrTextContainer.id = "yrTextContainer";
-            yrTextContainer.classList.add("yrTextContainer");
-            document.body.appendChild(yrTextContainer);
+window.scrollTo(0,0);
+data.sort((a, b) => a.yr - b.yr);
+const startYr = data[0].yr;
+const endYr = data[data.length - 1].yr;
+const timeLength = endYr - startYr;
+const stX = 100;
+const stY = 100;
+const intervalH = 10;
+const intervalV = 40;
+let contents = document.getElementById("contents");
+contents.style.width = (timeLength*intervalH + stX + 400) + "px";
+const contentsHeight = data.length*intervalV + stY;
+contents.style.height = contentsHeight + "px";
 
-            const yrLineSt = startYr - startYr%10;
-            const yrLineEnd = endYr + (10 - endYr%10);
-            const yrLineInterval = intervalH*10;
-            const yrLineCount = (yrLineEnd - yrLineSt)/10 + 5;
-            const stPos = -(startYr%10 * intervalH);
-            for(let i = 0; i < yrLineCount; i++){
-                const yrText = document.createElement("div");
-                yrText.classList.add("yrText");
-                yrText.innerHTML = (yrLineSt + i*10).toString();
-                yrText.style.left = (stPos + i*yrLineInterval +2) + "px";
-                yrText.style.top = "0px";
-                yrTextContainer.appendChild(yrText);
-                const yrLine = document.createElement("div");
-                yrLine.classList.add("yrLine");
-                yrLine.style.left = (stPos + i*yrLineInterval) + "px";
-                yrLine.style.height = contentsHeight + "px";
-                yrTextContainer.appendChild(yrLine);
-            }
+const yrLineSt = startYr - startYr%10;
+const yrLineEnd = endYr + (10 - endYr%10);
+const yrLineInterval = intervalH*10;
+const yrLineCount = (yrLineEnd - yrLineSt)/10 + 5;
+const stPos = -(startYr%10 * intervalH) + stX;
+for(let i = 0; i < yrLineCount; i++){
+    const yrLine = document.createElement("div");
+    yrLine.classList.add("yrLine");
+    yrLine.style.left = (stPos + i*yrLineInterval) + "px";
+    yrLine.style.height = contentsHeight + "px";
+    yrLineContainer.appendChild(yrLine);
+    const yrText = document.createElement("div");
+    yrText.classList.add("yrText");
+    yrText.innerHTML = (yrLineSt + i*10).toString();
+    yrText.style.left = (stPos + i*yrLineInterval +2) + "px";
+    yrText.style.top = "0px";
+    yrTextContainer.appendChild(yrText);
+}
 
-            data.forEach((item, index) => {
-                let entry = document.createElement("div");
-                entry.classList.add("entry");
-                entry.innerHTML = `<div class="desc">${item.desc}</div>`;
-                console.log(item.yr - startYr);
-                entry.style.left = (stX + (item.yr - startYr)*intervalH) + "px";
-                entry.style.top = stY + index*intervalV + "px";
-                let contents = document.getElementById("contents");
-                contents.appendChild(entry);
-            });
+data.forEach((item, index) => {
+    let entry = document.createElement("div");
+    entry.classList.add("entry");
+    entry.innerHTML = `<div class="desc">${item.desc}</div>`;
+    entry.style.left = (stX + (item.yr - startYr)*intervalH) + "px";
+    entry.style.top = stY + index*intervalV + "px";
+    let contents = document.getElementById("contents");
+    contents.appendChild(entry);
+});
 
-        function createEntryDetail(item){
-            for(let i =0; i<data.length; i++){
-                const item = data[i];    
-                let entry = document.createElement("div");
-                entry.classList.add("detail");
-                entry.innerHTML = `
-                    <div class="nation">${item.nation}</div>
-                    <div class="yr">${item.yr}</div>
-                    <div class="desc">${item.desc}</div>`;
-                if(item.ex1 != null){
-                    entry.innerHTML += `<div class="ex1">${item.ex1}</div>`
-                }
-                if(item.ex2 != null){
-                    entry.innerHTML += `<div class="ex2">${item.ex2}</div>`
-                }
-                if(item.ex3 != null){
-                    entry.innerHTML += `<div class="ex3">${item.ex3}</div>`
-                }
-                if(item.cite1 != null){
-                    entry.innerHTML += `<div class="cite1">${item.cite1}</div>`
-                }  
-                document.body.appendChild(entry);
-            }
-        }
+function createEntryDetail(item){
+    for(let i =0; i<data.length; i++){
+        const item = data[i];    
+        let entry = document.createElement("div");
+        entry.classList.add("detail");
+        entry.innerHTML = `
+            <div class="nation">${item.nation}</div>
+            <div class="yr">${item.yr}</div>
+            <div class="desc">${item.desc}</div>`;
+        if(item.ex1 != null){entry.innerHTML += `<div class="ex1">${item.ex1}</div>`}
+        if(item.ex2 != null){entry.innerHTML += `<div class="ex2">${item.ex2}</div>`}
+        if(item.ex3 != null){entry.innerHTML += `<div class="ex3">${item.ex3}</div>`}
+        if(item.cite1 != null){entry.innerHTML += `<div class="cite1">${item.cite1}</div>`}  
+        document.body.appendChild(entry);
+    }
+}
 
-        const content = document.getElementById('contents');
-
+const content = document.getElementById('contents');
+content.style.transform = "translate(0px,0px)";
 let isDragging = false;
 let startX, startY;
 let currentX = 0, currentY = 0;
-
-function onMouseMove(e) {
-  if (!isDragging) return;
-  currentX = e.clientX - startX;
-  currentY = e.clientY - startY;
-  document.getElementById("yrTextContainer").style.left = currentX + "px";
-  document.getElementById("yrTextContainer").style.zIndex = "3";
-  content.style.transform = `translate(${currentX}px, ${currentY}px)`;
-  
-}
-
-function onMouseUp() {
-  isDragging = false;
-  content.style.cursor = 'default';
-  document.removeEventListener('mousemove', onMouseMove);
-  document.removeEventListener('mouseup', onMouseUp);
-}
-
 content.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.clientX - currentX;
@@ -113,6 +85,22 @@ content.addEventListener('mousedown', (e) => {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
+function onMouseMove(e) {
+  if (!isDragging) return;
+  currentX = e.clientX - startX;
+  currentY = e.clientY - startY;
+  document.getElementById("yrTextContainer").style.left = currentX + "px";
+  document.getElementById("yrLineContainer").style.left = currentX + "px";
+  content.style.transform = `translate(${currentX}px, ${currentY}px)`;
+}
+function onMouseUp() {
+  isDragging = false;
+  content.style.cursor = 'default';
+  document.removeEventListener('mousemove', onMouseMove);
+  document.removeEventListener('mouseup', onMouseUp);
+}
+
+
         </script>
     </body>
 </html>
