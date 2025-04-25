@@ -2,6 +2,7 @@
     <head>
         <meta charset="utf-8">
         <title>동아시아 타이포그래피 연대기</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
@@ -85,7 +86,8 @@ function createEntryDetail(item){
 let isDragging = false;
 let startX , startY;
 let currentX = 0, currentY = 0;
-content.addEventListener('mousedown', (e) => {
+
+document.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.clientX - currentX;
   startY = e.clientY - currentY;
@@ -101,11 +103,9 @@ function onMouseMove(e) {
   document.getElementById("yrLineContainer").style.left = currentX + "px";
   content.style.top = currentY + "px";
   content.style.left = currentX + "px";
-  console.log("move");
   //content.style.transform = `translate(${currentX}px, ${currentY}px)`;
 }
 function onMouseUp(e) {
-console.log("mouseup");
   isDragging = false;
   content.style.cursor = 'default';
   document.removeEventListener('mousemove', onMouseMove);
