@@ -30,9 +30,11 @@ c.id = "yrTextContainer"; main.appendChild(c);
 
 
 const content = document.getElementById("contents");
-content.style.width = (timeLength*intervalH + stX + 400) + "px";
+const yrLineContainer = document.getElementById("yrLineContainer");
+const yrTextContainer = document.getElementById("yrTextContainer");
+//content.style.width = (timeLength*intervalH + stX + 400) + "px";
 const contentsHeight = data.length*intervalV + stY*2;
-content.style.height = contentsHeight + "px";
+//content.style.height = contentsHeight + "px";
 
 const yrLineSt = startYr - startYr%10;
 const yrLineEnd = endYr + (10 - endYr%10);

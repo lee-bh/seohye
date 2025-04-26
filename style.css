@@ -36,8 +36,6 @@
             #contents{
                 position: relative;
                 background:rgba(76, 175, 80, 0.3);
-                width: 400px;
-                height: 400px;
             }
             #yrTextContainer, #yrLineContainer{      
                 position: absolute;
