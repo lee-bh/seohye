@@ -24,7 +24,7 @@ async function dataload() {
 dataload().then(data => action()).catch(error => console.log(error));
 function action(data){
     console.log(data);
-data.sort((a, b) => a.yr - b.yr);
+//data.sort((a, b) => a.yr - b.yr);
 const startYr = data[0].yr;
 const endYr = data[data.length - 1].yr;
 const timeLength = endYr - startYr;
