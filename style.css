@@ -20,9 +20,10 @@
                 z-index: 100;
                 display: flex;
             }
-            h1{font-size: 2rem;}
+            h1{font-size: 2rem;
+                cursor:pointer;}
             .country{padding:0rem 0.7rem; margin:0.7rem;background: white;
-            border-left:3px solid black;}    
+            border-left:3px solid black; cursor:pointer;}    
             .jpn{border-color: #00F}
             .kr{border-color: black}
             .cn{border-color: #F00}
@@ -61,6 +62,7 @@
                 position: absolute;
                 left: 0;
                 top: 0;
+                user-select: none;
             }
 
             #indicator{
