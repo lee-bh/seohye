@@ -8,17 +8,16 @@
     <body>
         <header>
             <h1 onclick="location.reload()">동아시아 타이포그래피 연표</h1>
-            <div class="country cn">china</div>
-            <div class="country jpn">japan</div>
-            <div class="country korea">korea</div>
+            <div class="country cn" onclick="createEntry('cn')">china</div>
+            <div class="country jpn" id="jpn" onclick="createEntry('jpn')">japan</div>
+            <div class="country korea" id="kr" onclick="createEntry('kr')">korea</div>
         </header>
         <main id="main"></main>
         <script src="data.js"></script>
         <script>
 
 data.sort((a, b) => a.yr - b.yr);
-data.forEach((item,index)=>{item["num"] = index; console.log(item.num)});
-
+data.forEach((item,index)=>{item["num"] = index;});
 
 const startYr = data[0].yr;
 const endYr = data[data.length - 1].yr;
@@ -35,7 +34,6 @@ let b = document.createElement("div");
 b.id = "contents"; main.appendChild(b);
 let c = document.createElement("div");
 c.id = "yrTextContainer"; main.appendChild(c);
-
 
 const content = document.getElementById("contents");
 const yrLineContainer = document.getElementById("yrLineContainer");
@@ -63,32 +61,74 @@ for(let i = 0; i < yrLineCount; i++){
     yrText.style.top = "4px";
     yrTextContainer.appendChild(yrText);
 }
-createEntry();
+createEntry("all");
 function createEntry(key){
-    if (key == ""){
-
+    content.innerHTML = "";
+    const workData = [];
+    if (key == "all"){
+        data.forEach(item => {
+            workData.push(item);
+        });
     }else if(key == "cn"){
-        data.sort((a, b) => a.nation - b.nation);
+        console.log("cn clicked!");
+        data.forEach(item => {
+            if(item.nation == "중국"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == "한국"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == "일본"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == ""){workData.push(item);};
+        });
+    }else if(key == "jpn"){
+        console.log("jpn clicked!");
+        data.forEach(item => {
+            if(item.nation == "일본"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == "한국"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == "중국"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == ""){workData.push(item);};
+        });
+    }else if(key == "kr"){
+        console.log("kr clicked!");
+        data.forEach(item => {
+            if(item.nation == "한국"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == "일본"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == "중국"){workData.push(item);};
+        });
+        data.forEach(item => {
+            if(item.nation == ""){workData.push(item);};
+        });
     }
-    for(let i=0; i<data.length; i++){
+    for(let i=0; i<workData.length; i++){
         let entry = document.createElement("div");
         entry.classList.add("entry");
-        entry.id = "h" + data[i].num;
-        entry.innerHTML = `${data[i].desc}`;
-        entry.style.left = (stX + (data[i].yr - startYr)*intervalH) + "px";
+        entry.id = "h" + workData[i].num;
+        entry.innerHTML = `${workData[i].desc}`;
+        entry.style.left = (stX + (workData[i].yr - startYr)*intervalH) + "px";
         entry.style.top = stY + i*intervalV + "px";
         entry.style.zIndex = 100 - i;
-        if(data[i].nation == "한국"){ entry.style.borderColor = "#000"};
-        if(data[i].nation == "일본"){ entry.style.borderColor = "#00F"};
-        if(data[i].nation == "중국"){ entry.style.borderColor = "#F00"};
+        if(workData[i].nation == "한국"){ entry.style.borderColor = "#000"};
+        if(workData[i].nation == "일본"){ entry.style.borderColor = "#00F"};
+        if(workData[i].nation == "중국"){ entry.style.borderColor = "#F00"};
         entry.onmouseenter = (e) => { entryMouseEnter(e);}
         entry.onmouseleave = (e) => { entryMouseLeave(e);}
         
         content.appendChild(entry);
     };
 }
-
-
 
 function entryMouseEnter(e) {
     const thisId = e.target.id;
