@@ -14,10 +14,12 @@
         </header>
         <main id="main"></main>
         <script src="data.js"></script>
+        <script src="subdata.js"></script>
         <script>
 
 data.sort((a, b) => a.yr - b.yr);
 data.forEach((item,index)=>{item["num"] = index;});
+subData.forEach((item,index)=>{item["num"] = index;});
 
 const startYr = data[0].yr;
 const endYr = data[data.length - 1].yr;
@@ -131,16 +133,22 @@ function createEntry(key){
 }
 
 function entryMouseEnter(e) {
+    indicator.style.display = "none";
     const thisId = e.target.id;
     const eId = thisId.substring(1);
     data.forEach(item => {
         if(item.num == eId){
-            e.target.innerHTML = item.nation + ", " + item.yr + "년 " + item.desc + "<br>(" + item.cite1 + ")";
+            e.target.innerHTML = item.nation + ", " + item.yr + "년 " + item.desc;
+            if(item.ex1 != "" && item.ex1 !== "null"){
+                e.target.innerHTML += "<br>" + item.ex1;
+            }
+            e.target.innerHTML += "<br>(출처: " + item.cite1 + ")";
         }
     });
     
 }
 function entryMouseLeave(e) {
+    indicator.style.display = "block";
     const thisId = e.target.id;
     const eId = thisId.substring(1);
     data.forEach(item => {
@@ -149,7 +157,6 @@ function entryMouseLeave(e) {
         }
     });
 }
-
 
 function createEntryDetail(item){
     for(let i =0; i<data.length; i++){
