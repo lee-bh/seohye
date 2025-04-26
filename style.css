@@ -28,8 +28,11 @@
             .country{padding:0rem 0.7rem; margin:0.7rem;background: white;
             border-left:3px solid black; cursor:pointer;}    
             .jpn{border-color: #00F}
+            .jpn:hover{background: #00f;color:white}
             .kr{border-color: black}
+            .kr:hover{background: #000;color:white}
             .cn{border-color: #F00}
+            .cn:hover{background: #f00;color:white}
             .entry{
                 user-select: none;
                 position: absolute;
