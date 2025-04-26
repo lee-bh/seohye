@@ -6,25 +6,12 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1>동아시아 타이포그래피 연대기</h1>
+        <h1 onclick="window.scrollTo(0,0); console.log('okay');">동아시아 타이포그래피 연대기</h1>
         <main id="main"></main>
-       
+        <script src="data.js"></script>
         <script>
-async function dataload() {
-    try {
-        const response = await fetch('data.json');
-        return response.json();
-    }
-    catch(error) { 
-        console.log(error);
-        throw error;
-    }
-}
 
-dataload().then(data => action()).catch(error => console.log(error));
-function action(data){
-    console.log(data);
-//data.sort((a, b) => a.yr - b.yr);
+data.sort((a, b) => a.yr - b.yr);
 const startYr = data[0].yr;
 const endYr = data[data.length - 1].yr;
 const timeLength = endYr - startYr;
@@ -45,9 +32,10 @@ c.id = "yrTextContainer"; main.appendChild(c);
 const content = document.getElementById("contents");
 const yrLineContainer = document.getElementById("yrLineContainer");
 const yrTextContainer = document.getElementById("yrTextContainer");
-content.style.width = (timeLength*intervalH + stX + 400) + "px";
+
 const contentsHeight = data.length*intervalV + stY*2;
 content.style.height = contentsHeight + "px";
+content.style.width = (timeLength*intervalH + stX + 400) + "px";
 
 const yrLineSt = startYr - startYr%10;
 const yrLineEnd = endYr + (10 - endYr%10);
@@ -68,17 +56,17 @@ for(let i = 0; i < yrLineCount; i++){
     yrTextContainer.appendChild(yrText);
 }
 
-data.forEach((item, index) => {
+for(let i=0; i<data.length; i++){
     let entry = document.createElement("div");
     entry.classList.add("entry");
-    entry.innerHTML = `<div class="desc">${item.desc}</div>`;
-    entry.style.left = (stX + (item.yr - startYr)*intervalH) + "px";
-    entry.style.top = stY + index*intervalV + "px";
-    if(item.nation == "한국"){ entry.style.borderColor = "#000"};
-    if(item.nation == "일본"){ entry.style.borderColor = "#00F"};
-    if(item.nation == "중국"){ entry.style.borderColor = "#F00"};
+    entry.innerHTML = `<div class="desc">${data[i].desc}</div>`;
+    entry.style.left = (stX + (data[i].yr - startYr)*intervalH) + "px";
+    entry.style.top = stY + i*intervalV + "px";
+    if(data[i].nation == "한국"){ entry.style.borderColor = "#000"};
+    if(data[i] == "일본"){ entry.style.borderColor = "#00F"};
+    if(data[i] == "중국"){ entry.style.borderColor = "#F00"};
     content.appendChild(entry);
-});
+};
 
 function createEntryDetail(item){
     for(let i =0; i<data.length; i++){
@@ -95,8 +83,6 @@ function createEntryDetail(item){
         if(item.cite1 != null){entry.innerHTML += `<div class="cite1">${item.cite1}</div>`}  
         document.body.appendChild(entry);
     }
-}
-
 }
 
 let isDragging = false;
