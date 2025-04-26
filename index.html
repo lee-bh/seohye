@@ -8,8 +8,22 @@
     <body>
         <h1>동아시아 타이포그래피 연대기</h1>
         <main id="main"></main>
-        <script src="data.js"></script>
+       
         <script>
+const data = fetchData('./data.json'); 
+
+async function fetchData(filePath) {
+  try {
+    const response = await fetch(filePath);
+
+    return response.json();
+
+  } catch (error) {
+    console.error('Error fetching or parsing JSON:', error);
+    throw error;
+  }
+}
+
 
 data.sort((a, b) => a.yr - b.yr);
 const startYr = data[0].yr;
@@ -32,9 +46,9 @@ c.id = "yrTextContainer"; main.appendChild(c);
 const content = document.getElementById("contents");
 const yrLineContainer = document.getElementById("yrLineContainer");
 const yrTextContainer = document.getElementById("yrTextContainer");
-//content.style.width = (timeLength*intervalH + stX + 400) + "px";
+content.style.width = (timeLength*intervalH + stX + 400) + "px";
 const contentsHeight = data.length*intervalV + stY*2;
-//content.style.height = contentsHeight + "px";
+content.style.height = contentsHeight + "px";
 
 const yrLineSt = startYr - startYr%10;
 const yrLineEnd = endYr + (10 - endYr%10);
