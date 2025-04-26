@@ -13,13 +13,19 @@
                 background-color: #ddd;
                 overflow: hidden;
             }
-            h1{
+            header{
                 position: fixed;
-                right: 3rem;
+                left: 4.4rem;
                 top: 3rem;
                 z-index: 100;
-                cursor: pointer;
-            }    
+                display: flex;
+            }
+            h1{font-size: 2rem;}
+            .country{padding:0rem 0.7rem; margin:0.7rem;background: white;
+            border-left:3px solid black;}    
+            .jpn{border-color: #00F}
+            .kr{border-color: black}
+            .cn{border-color: #F00}
             .entry{
                 user-select: none;
                 position: absolute;
