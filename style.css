@@ -11,7 +11,7 @@
             }
             body{
                 background-color: #ddd;
-                
+                overflow: hidden;
             }
             h1{
                 position: fixed;
@@ -34,8 +34,7 @@
                 color: #fff;
             }
             #contents{
-                position: relative;
-                background:rgba(76, 175, 80, 0.3);
+                position: absolute;
             }
             #yrTextContainer, #yrLineContainer{      
                 position: absolute;

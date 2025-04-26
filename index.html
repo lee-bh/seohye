@@ -23,7 +23,7 @@ const intervalV = 40;
 const main = document.getElementById("main");
 let a = document.createElement("div");
 a.id = "yrLineContainer"; main.appendChild(a);
-let b = document.createElement("div");b.innerHTML = "";
+let b = document.createElement("div");
 b.id = "contents"; main.appendChild(b);
 let c = document.createElement("div");
 c.id = "yrTextContainer"; main.appendChild(c);
@@ -63,8 +63,8 @@ for(let i=0; i<data.length; i++){
     entry.style.left = (stX + (data[i].yr - startYr)*intervalH) + "px";
     entry.style.top = stY + i*intervalV + "px";
     if(data[i].nation == "한국"){ entry.style.borderColor = "#000"};
-    if(data[i] == "일본"){ entry.style.borderColor = "#00F"};
-    if(data[i] == "중국"){ entry.style.borderColor = "#F00"};
+    if(data[i].nation == "일본"){ entry.style.borderColor = "#00F"};
+    if(data[i].nation == "중국"){ entry.style.borderColor = "#F00"};
     content.appendChild(entry);
 };
 
