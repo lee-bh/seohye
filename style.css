@@ -20,8 +20,11 @@
                 z-index: 100;
                 display: flex;
             }
-            h1{font-size: 2rem;
-                cursor:pointer;}
+            h1{
+                font-size: 2rem;
+                cursor:pointer;
+                margin-right:0.7rem;
+            }
             .country{padding:0rem 0.7rem; margin:0.7rem;background: white;
             border-left:3px solid black; cursor:pointer;}    
             .jpn{border-color: #00F}
