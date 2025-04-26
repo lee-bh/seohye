@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <h1 onclick="window.scrollTo(0,0); console.log('okay');">동아시아 타이포그래피 연대기</h1>
+        <h1 onclick="location.reload()">동아시아 타이포그래피 연대기</h1>
         <main id="main"></main>
         <script src="data.js"></script>
         <script>
@@ -97,23 +97,37 @@ document.addEventListener('mousedown', (e) => {
   document.addEventListener('mousemove', onMouseMove);
   document.addEventListener('mouseup', onMouseUp);
 });
+
+let indicator = document.createElement('div');
+indicator.id = "indicator";
+indicator.innerHTML = "";
+document.body.appendChild(indicator);
+
+// content.onmouseenter = () => indicator.style.display = 'block';
+// content.onmouseleave = () => indicator.style.display = 'none';
+
+
 function onMouseMove(e) {
-  if (!isDragging) return;
+    let rect = content.getBoundingClientRect();
+    console.log(rect);
+    indicator.innerHTML = startYr + Math.floor((e.clientX - rect.left - stX)/intervalH);
+
+    indicator.style.left = e.clientX;
+    indicator.style.top = e.clientY + 30;
+  if (isDragging){
   currentX = e.clientX - startX;
   currentY = e.clientY - startY;
   document.getElementById("yrTextContainer").style.left = currentX + "px";
   document.getElementById("yrLineContainer").style.left = currentX + "px";
   content.style.top = currentY + "px";
   content.style.left = currentX + "px";
+  }
   //content.style.transform = `translate(${currentX}px, ${currentY}px)`;
 }
 function onMouseUp(e) {
   isDragging = false;
   content.style.cursor = 'default';
-  document.removeEventListener('mousemove', onMouseMove);
-  document.removeEventListener('mouseup', onMouseUp);
 }
-
 
         </script>
     </body>
