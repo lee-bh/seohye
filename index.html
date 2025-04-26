@@ -10,21 +10,19 @@
         <main id="main"></main>
        
         <script>
-const data = fetchData('./data.json'); 
-
-async function fetchData(filePath) {
-  try {
-    const response = await fetch(filePath);
-
-    return response.json();
-
-  } catch (error) {
-    console.error('Error fetching or parsing JSON:', error);
-    throw error;
-  }
+async function dataload() {
+    try {
+        const response = await fetch('data.json');
+        return response;
+    }
+    catch(error) { 
+        console.log(error);
+        throw error;
+    }
 }
-console.log(data);
 
+dataload().then(data => action()).catch(error => console.log(error));
+function action(){
 data.sort((a, b) => a.yr - b.yr);
 const startYr = data[0].yr;
 const endYr = data[data.length - 1].yr;
@@ -96,6 +94,8 @@ function createEntryDetail(item){
         if(item.cite1 != null){entry.innerHTML += `<div class="cite1">${item.cite1}</div>`}  
         document.body.appendChild(entry);
     }
+}
+
 }
 
 let isDragging = false;
