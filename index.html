@@ -19,31 +19,40 @@
 
 data.sort((a, b) => a.yr - b.yr);
 data.forEach((item,index)=>{item["num"] = index;});
+subData.sort((a, b) => a.begin - b.begin);
 subData.forEach((item,index)=>{item["num"] = index;});
+
 
 const startYr = data[0].yr;
 const endYr = data[data.length - 1].yr;
 const timeLength = endYr - startYr;
 const stX = 100;
-const stY = 100;
+const stY = 250;
+const stSubY = 50;
 const intervalH = 10;
 const intervalV = 40;
 
 const main = document.getElementById("main");
 let a = document.createElement("div");
 a.id = "yrLineContainer"; main.appendChild(a);
+let c = document.createElement("div");
+c.id = "subContents"; main.appendChild(c);
 let b = document.createElement("div");
 b.id = "contents"; main.appendChild(b);
-let c = document.createElement("div");
-c.id = "yrTextContainer"; main.appendChild(c);
+let d = document.createElement("div");
+d.id = "yrTextContainer"; main.appendChild(d);
 
 const content = document.getElementById("contents");
+const subContent = document.getElementById("subContents");
 const yrLineContainer = document.getElementById("yrLineContainer");
 const yrTextContainer = document.getElementById("yrTextContainer");
 
 const contentsHeight = data.length*intervalV + stY*2;
 content.style.height = contentsHeight + "px";
 content.style.width = (timeLength*intervalH + stX + 400) + "px";
+
+subContent.style.width = (timeLength*intervalH + stX + 400) + "px";
+subContent.style.height = "300px";
 
 const yrLineSt = startYr - startYr%10;
 const yrLineEnd = endYr + (10 - endYr%10);
@@ -63,6 +72,19 @@ for(let i = 0; i < yrLineCount; i++){
     yrText.style.top = "4px";
     yrTextContainer.appendChild(yrText);
 }
+
+createSubEntry();
+function createSubEntry(){
+    subData.forEach((item, i) => {
+        let subEntry = document.createElement("div");
+        subEntry.classList.add("sub-entry");
+        subEntry.innerHTML = `${subData[i].title}`;
+        subEntry.style.left = (stX + (subData[i].begin - startYr)*intervalH) + "px";
+        subEntry.style.top = stSubY + (subData[i].layer-1)*intervalV + "px";
+        subContent.appendChild(subEntry);
+    });
+}
+
 createEntry("all");
 function createEntry(key){
     content.innerHTML = "";
@@ -121,7 +143,7 @@ function createEntry(key){
         entry.innerHTML = `${workData[i].desc}`;
         entry.style.left = (stX + (workData[i].yr - startYr)*intervalH) + "px";
         entry.style.top = stY + i*intervalV + "px";
-        entry.style.zIndex = 100 - i;
+        entry.style.zIndex = 300 - i;
         if(workData[i].nation == "한국"){ entry.style.borderColor = "#000"};
         if(workData[i].nation == "일본"){ entry.style.borderColor = "#00F"};
         if(workData[i].nation == "중국"){ entry.style.borderColor = "#F00"};
@@ -202,8 +224,9 @@ function onMouseMove(e) {
   if (isDragging){
   currentX = e.clientX - startX;
   currentY = e.clientY - startY;
-  document.getElementById("yrTextContainer").style.left = currentX + "px";
-  document.getElementById("yrLineContainer").style.left = currentX + "px";
+  yrTextContainer.style.left = currentX + "px";
+  yrLineContainer.style.left = currentX + "px";
+  subContent.style.left = currentX + "px";
   content.style.transform = `translate(${currentX}px, ${currentY}px)`;
   }
  

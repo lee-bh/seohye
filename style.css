@@ -48,14 +48,31 @@
                 background-color: black;
                 color: #fff;
             }
+            .sub-entry{
+                user-select: none;
+                position: absolute;
+                left: 0;
+                top: 0;
+                padding: 0.5rem 0.7rem;
+                max-width: 450px;
+                z-index: 10;
+            }
+            #subContents{
+                position: absolute;
+                z-index: 5;
+            }
             #contents{
                 position: absolute;
+                z-index: 6;
                 /* background: rgba(0,0,255,0.3); */
             }
             #yrTextContainer, #yrLineContainer{      
                 position: absolute;
                 left: 0px;
                 top: 0px;
+            }
+            #yrTextContainer{
+                z-index: 7;
             }
             .yrLine{
                 position: absolute;
