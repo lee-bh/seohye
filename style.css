@@ -90,8 +90,14 @@
             }
 
             #indicator{
-                border-left: 3px solid black;
+                
                 padding-left: 5px;
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+            #trackLine{
+                border-left: 1px solid black;
                 position: absolute;
                 left: 0;
                 top: 0;

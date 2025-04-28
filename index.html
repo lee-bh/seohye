@@ -156,6 +156,7 @@ function createEntry(key){
 
 function entryMouseEnter(e) {
     indicator.style.display = "none";
+    trackLine.style.display = "none";
     const thisId = e.target.id;
     const eId = thisId.substring(1);
     data.forEach(item => {
@@ -171,6 +172,7 @@ function entryMouseEnter(e) {
 }
 function entryMouseLeave(e) {
     indicator.style.display = "block";
+    trackLine.style.display = "block";
     const thisId = e.target.id;
     const eId = thisId.substring(1);
     data.forEach(item => {
@@ -201,6 +203,7 @@ let isDragging = false;
 let startX , startY;
 let currentX = 0, currentY = 0;
 
+
 document.addEventListener('mousedown', (e) => {
   isDragging = true;
   startX = e.clientX - currentX;
@@ -215,12 +218,18 @@ indicator.id = "indicator";
 indicator.innerHTML = "";
 document.body.appendChild(indicator);
 
+let trackLine = document.createElement('div');
+trackLine.id = "trackLine";
+trackLine.style.height = contentsHeight + "px";
+document.body.appendChild(trackLine);
+
 function onMouseMove(e) {
     let rect = content.getBoundingClientRect();
     indicator.innerHTML = startYr + Math.floor((e.clientX - rect.left - stX)/intervalH);
-
     indicator.style.left = e.clientX;
     indicator.style.top = e.clientY + 30;
+    trackLine.style.left = e.clientX;
+
   if (isDragging){
   currentX = e.clientX - startX;
   currentY = e.clientY - startY;
@@ -233,7 +242,7 @@ function onMouseMove(e) {
 }
 function onMouseUp(e) {
   isDragging = false;
-  content.style.cursor = 'default';
+  content.style.cursor = 'grab';
 }
 
         </script>
