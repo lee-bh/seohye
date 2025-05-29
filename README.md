@@ -2,11 +2,6 @@
 
 This project is a web application that visualizes key events in the history of East Asian typography. It allows users to explore a timeline of significant developments and figures in Chinese, Japanese, and Korean typography.
 
-## Technologies Used
-
-- HTML
-- CSS
-- JavaScript
 
 ## File Structure
 
