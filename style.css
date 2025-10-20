@@ -49,6 +49,7 @@
                 color: #fff;
             }
             .sub-entry{
+                border-left: 3px solid black;
                 user-select: none;
                 position: absolute;
                 left: 0;
